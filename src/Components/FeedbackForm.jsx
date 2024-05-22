@@ -14,14 +14,32 @@ import './FeedbackForm.css'; // Import CSS for styling
       [name]:value
     })
   }
-    
+  const handleSubmit = (event)=>{
+    event.preventDefault()
+
+    const confirmation_message = `
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Feedback: ${formData.feedback}
+    `
+    const isConfirmed = window.confirm(`Please confirm your details: \n\ ${confirmation_message}`)
+    if (isConfirmed){
+      console.log('is submitting data:', formData)
+      setFormData({
+        name:'',
+        email: '',
+        feedback: ''
+      })
+    alert('Thank you for your valuable feedback!')
+    }
+  }
 
   return (
     <>
     <nav>
     Tell Us What You Think
     </nav>
-      <form className="feedback-form">
+      <form onSubmit={handleSubmit} className="feedback-form">
         <h2>We'd Love to Hear From You!</h2>
         <p>Please share your feedback with us.</p>
         <input
