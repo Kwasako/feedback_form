@@ -5,13 +5,14 @@ import './FeedbackForm.css'; // Import CSS for styling
     const [formData, setFormData] = useState({
       name:"",
       email: "",
-      feedback:""
+      feedback:"",
+      rating: ""
     })
   const handleChange = (event)=>{
-    const {value, name} = event.target
+    const {value, name, type, checked} = event.target
     setFormData({
       ...formData,
-      [name]:value
+      [name]: type==checked? checked:value
     })
   }
   const handleSubmit = (event)=>{
@@ -21,6 +22,7 @@ import './FeedbackForm.css'; // Import CSS for styling
       Name: ${formData.name}
       Email: ${formData.email}
       Feedback: ${formData.feedback}
+      Rating: ${formData.rating}
     `
     const isConfirmed = window.confirm(`Please confirm your details: \n\ ${confirmation_message}`)
     if (isConfirmed){
@@ -28,7 +30,8 @@ import './FeedbackForm.css'; // Import CSS for styling
       setFormData({
         name:'',
         email: '',
-        feedback: ''
+        feedback: '',
+        rating: ''
       })
     alert('Thank you for your valuable feedback!')
     }
@@ -65,6 +68,63 @@ import './FeedbackForm.css'; // Import CSS for styling
           
         </textarea>
         <button type='submit'> Submit Feedback</button>
+        <br />
+        <br/>
+        <br />
+        <fieldset>
+          <legend> Rate us </legend>
+          <input
+            type='radio'
+            name='rating'
+            id='one'
+            value='one'
+            checked = {formData.rating === "one"}
+            onChange={handleChange}
+          />
+          <label htmlFor='one'> 1 </label>
+          <br />
+          <input
+            type='radio'
+            name='rating'
+            id='two'
+            value='two'
+            checked = {formData.rating === "two"}
+            onChange={handleChange}
+          />
+          <label htmlFor='two'> 2 </label>
+          <br />
+          <input
+            type='radio'
+            name='rating'
+            id='three'
+            value='three'
+            checked = {formData.rating === "three"}
+            onChange={handleChange}
+          />
+          <label htmlFor='three'> 3 </label>
+          <br />
+          <input
+            type='radio'
+            name='rating'
+            id='four'
+            value='four'
+            checked = {formData.rating === "four"}
+            onChange={handleChange}
+          />
+          <label htmlFor='four'> 4 </label>
+          <br />
+          <input
+            type='radio'
+            name='rating'
+            id='five'
+            value='five'
+            checked = {formData.rating === "five"}
+            onChange={handleChange}
+          />
+          <label htmlFor='five'> 5 </label>
+          <br />
+        </fieldset>
+        
         
       </form>
     </>
