@@ -6,22 +6,24 @@ import './FeedbackForm.css'; // Import CSS for styling
       name:"",
       email: "",
       feedback:"",
-      rating: ""
+      rating: "",
+      isSignUp: true
     })
   const handleChange = (event)=>{
     const {value, name, type, checked} = event.target
     setFormData({
       ...formData,
-      [name]: type==checked? checked:value
+      [name]: type=="checkbox"? checked:value
     })
   }
   const handleSubmit = (event)=>{
     event.preventDefault()
-
+    const hasSignUP = formData.isSignUp? "Yes":"No"
     const confirmation_message = `
       Name: ${formData.name}
       Email: ${formData.email}
       Feedback: ${formData.feedback}
+      SignUp_Newsletter: ${hasSignUP}
       Rating: ${formData.rating}
     `
     const isConfirmed = window.confirm(`Please confirm your details: \n\ ${confirmation_message}`)
@@ -31,7 +33,8 @@ import './FeedbackForm.css'; // Import CSS for styling
         name:'',
         email: '',
         feedback: '',
-        rating: ''
+        rating: '',
+        isSignUp: true
       })
     alert('Thank you for your valuable feedback!')
     }
@@ -64,15 +67,20 @@ import './FeedbackForm.css'; // Import CSS for styling
           placeholder='your feedback'
           value={formData.feedback}
           onChange={handleChange}
-          >
-          
+          >   
         </textarea>
-        <button type='submit'> Submit Feedback</button>
+        <input 
+                type="checkbox" 
+                id="isSignUp" 
+                checked={formData.isSignUp}
+                onChange={handleChange}
+                name="isSignUp"
+            />
+        <label htmlFor="isSignUp"> SignUp for Newsletter </label>
         <br />
-        <br/>
         <br />
         <fieldset>
-          <legend> Rate us </legend>
+          <legend> <strong>Rate Us</strong> </legend>
           <input
             type='radio'
             name='rating'
@@ -124,6 +132,9 @@ import './FeedbackForm.css'; // Import CSS for styling
           <label htmlFor='five'> 5 </label>
           <br />
         </fieldset>
+        <br />
+        <br />
+        <button type='submit'> Submit Feedback</button>
         
         
       </form>
